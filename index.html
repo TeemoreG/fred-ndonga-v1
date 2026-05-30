@@ -149,10 +149,14 @@ h1,h2,h3,h4,.logo h2,.logo span,.nav-links a,.btn,.hero-badge,.section-header h2
 .btn-outline:hover::before{left:100%;}
 .btn-outline:hover{background:rgba(201,160,76,0.1);border-color:var(--gold);transform:translateY(-3px);}
 
-/* HERO */
+/* HERO – Desktop: side by side */
 .hero{
   min-height:calc(90vh - var(--topbar-h) - var(--navbar-h));
-  display:flex;align-items:center;justify-content:space-between;gap:70px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  gap:70px;
   padding:40px 0 60px;
 }
 .hero-left{flex:1.1;}
@@ -274,27 +278,142 @@ h1,h2,h3,h4,.logo h2,.logo span,.nav-links a,.btn,.hero-badge,.section-header h2
   display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;
 }
 
-/* FOOTER - IMPROVED GRID */
-footer{background:rgba(0,0,0,0.25);padding:50px 0 25px;margin-top:40px;border-top:1px solid rgba(255,255,255,0.05);}
+/* FOOTER – ALWAYS 4 COLUMNS (even on mobile) */
+footer{
+  background:rgba(0,0,0,0.25);
+  padding:50px 0 25px;
+  margin-top:40px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
 .footer-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
   margin-bottom:35px;
 }
-.footer-col h4{color:var(--gold);margin-bottom:18px;font-size:1rem;font-weight:600;}
-.footer-col a{display:block;color:#cbd5e1;text-decoration:none;margin-bottom:10px;transition:.2s;font-size:0.8rem;}
-.footer-col a:hover{color:var(--gold);padding-left:4px;}
-.footer-col p{color:#cbd5e1;font-size:0.8rem;margin-bottom:8px;line-height:1.4;}
-.social-links{display:flex;gap:12px;margin-top:12px;}
+.footer-col{
+  display: flex;
+  flex-direction: column;
+}
+.footer-col h4{
+  color:var(--gold);
+  margin-bottom:18px;
+  font-size:1rem;
+  font-weight:600;
+}
+.footer-col a{
+  display:block;
+  color:#cbd5e1;
+  text-decoration:none;
+  margin-bottom:10px;
+  transition:.2s;
+  font-size:0.8rem;
+}
+.footer-col a:hover{
+  color:var(--gold);
+  padding-left:4px;
+}
+.footer-col p{
+  color:#cbd5e1;
+  font-size:0.8rem;
+  margin-bottom:8px;
+  line-height:1.4;
+}
+.social-links{
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+}
 .social-links a{
-  width:34px;height:34px;background:rgba(255,255,255,0.08);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;color:#ffffff;
+  width:34px;
+  height:34px;
+  background:rgba(255,255,255,0.08);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#ffffff;
   transition:.3s;
 }
-.social-links a:hover{background:var(--gold);color:#1a2744;transform:translateY(-2px);}
-.hours p{margin-bottom:4px;font-size:0.75rem;}
-.copyright{text-align:center;padding-top:25px;border-top:1px solid rgba(255,255,255,0.08);color:#94a3b8;font-size:0.75rem;}
+.social-links a:hover{
+  background:var(--gold);
+  color:#1a2744;
+  transform:translateY(-2px);
+}
+.hours p{
+  margin-bottom:4px;
+  font-size:0.75rem;
+}
+.copyright{
+  text-align:center;
+  padding-top:25px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  color:#94a3b8;
+  font-size:0.75rem;
+}
+
+/* Keep 4 columns on ALL screen sizes - no stacking */
+@media(max-width:980px){
+  .footer-grid{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .footer-col h4{
+    font-size: 0.9rem;
+  }
+  .footer-col a, .footer-col p{
+    font-size: 0.7rem;
+  }
+}
+
+@media(max-width:600px){
+  .footer-grid{
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px;
+  }
+  .footer-col h4{
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+  }
+  .footer-col a, .footer-col p{
+    font-size: 0.6rem;
+    margin-bottom: 6px;
+  }
+  .social-links a{
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+  .hours p{
+    font-size: 0.55rem;
+  }
+}
+
+@media(max-width:480px){
+  .footer-grid{
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px;
+  }
+  .footer-col h4{
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+  .footer-col a, .footer-col p{
+    font-size: 0.5rem;
+    margin-bottom: 4px;
+  }
+  .social-links{
+    gap: 4px;
+  }
+  .social-links a{
+    width: 22px;
+    height: 22px;
+    font-size: 0.6rem;
+  }
+  .hours p{
+    font-size: 0.45rem;
+  }
+}
 
 .reveal{opacity:0;transform:translateY(25px);transition:all 0.7s ease;}
 .reveal.active{opacity:1;transform:translateY(0);}
@@ -311,17 +430,25 @@ footer{background:rgba(0,0,0,0.25);padding:50px 0 25px;margin-top:40px;border-to
   z-index:9999;width:0%;transition:width 0.1s linear;
 }
 
-/* ===== FIX: MOBILE SPACING (hero not touching nav) ===== */
+/* ===== RESPONSIVE: TABLET & MOBILE for other sections ===== */
 @media(max-width:980px){
   :root{--topbar-h:55px; --navbar-h:62px;}
+  
+  /* Hero becomes column: image below text */
   .hero{
-    padding: 70px 0 50px;  /* extra top space on mobile */
-    gap: 40px;
+    flex-direction: column;
+    padding: 60px 0 50px;
+    gap: 45px;
   }
+  .hero-left{ order:1; }
+  .hero-right{ order:2; }
+  
   .hero h1{font-size:3rem;}
   .hero-image img{height:380px;}
   .stats{grid-template-columns:repeat(2,1fr);}
   .contact-grid{grid-template-columns:1fr;}
+  
+  /* navigation drawer */
   .nav-links{
     position:fixed;top:var(--navbar-h);left:-100%;width:75%;height:calc(100vh - var(--navbar-h));
     background:#1a2744;flex-direction:column;align-items:center;justify-content:flex-start;
@@ -334,25 +461,34 @@ footer{background:rgba(0,0,0,0.25);padding:50px 0 25px;margin-top:40px;border-to
   body{cursor:auto;}
   .top-bar .container{justify-content:center;}
 }
+
 @media(max-width:600px){
   .hero{
-    padding: 60px 0 40px;  /* even more breathing room on small devices */
+    padding: 50px 0 40px;
+    gap: 35px;
   }
   .hero h1{font-size:2.2rem;}
   .stats{grid-template-columns:1fr;}
   .container{padding:0 20px;}
   .top-contact{gap:12px;justify-content:center;}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:30px;}
   .hero-buttons .btn, .hero-buttons .btn-outline{
     padding: 8px 20px;
     font-size: 0.8rem;
   }
-}
-@media(max-width:480px){
-  .footer-grid{grid-template-columns:1fr;}
-  .hero{
-    padding: 50px 0 35px;
+  .floating-card{
+    left: 10px;
+    bottom: -10px;
+    padding: 10px 16px;
   }
+  .floating-card h3{font-size: 1.2rem;}
+}
+
+@media(max-width:480px){
+  .hero{
+    padding: 40px 0 30px;
+  }
+  .hero h1{font-size:1.9rem;}
+  .section-header h2{font-size:1.8rem;}
 }
 </style>
 </head>
@@ -494,12 +630,46 @@ footer{background:rgba(0,0,0,0.25);padding:50px 0 25px;margin-top:40px;border-to
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-col"><h4>Fred Ndonga</h4><p>Hospitality Service & Operations Consultant</p><div class="social-links"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a></div></div>
-      <div class="footer-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="blog.html">Insights</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Resources</h4><a href="#">Consultation Guide</a><a href="#">Hospitality Blog</a><a href="#">Client Success Stories</a><a href="#">Training Programs</a></div>
-      <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-phone"></i> +254 702 741 067</p><p><i class="fas fa-envelope"></i> consult@fredndonga.co.ke</p><p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p><div class="hours"><p><strong>Office Hours:</strong></p><p>Mon-Fri 8am-5pm</p><p>Sat 9am-1pm</p><p>Sun Closed</p></div></div>
+      <div class="footer-col">
+        <h4>Fred Ndonga</h4>
+        <p>Hospitality Service & Operations Consultant</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Insights</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Consultation Guide</a>
+        <a href="#">Hospitality Blog</a>
+        <a href="#">Client Success Stories</a>
+        <a href="#">Training Programs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><i class="fas fa-phone"></i> +254 702 741 067</p>
+        <p><i class="fas fa-envelope"></i> consult@fredndonga.co.ke</p>
+        <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+        <div class="hours">
+          <p><strong>Office Hours:</strong></p>
+          <p>Mon-Fri 8am-5pm</p>
+          <p>Sat 9am-1pm</p>
+          <p>Sun Closed</p>
+        </div>
+      </div>
     </div>
-    <div class="copyright"><p>© 2025 Fred Ndonga Hospitality Consultancy. All rights reserved.</p></div>
+    <div class="copyright">
+      <p>© 2025 Fred Ndonga Hospitality Consultancy. All rights reserved.</p>
+    </div>
   </div>
 </footer>
 
